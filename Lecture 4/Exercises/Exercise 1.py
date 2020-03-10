@@ -1,0 +1,24 @@
+"""
+1.  Successor nodes are inserted at front of the fringe (successor list) as a node is expanded.
+    Is this a breadth (LIFO) or depth-first earch (FIFO)?
+
+    Answer: Depth-first search
+"""
+
+"""
+2.  For goal J, give the fringe (successor list) after expanding each node.
+
+    Answer: fringe: [State: J - Depth: 3, State: I - Depth: 3, State: H - Depth: 3, State: F - Depth: 2, State: B - Depth: 1]
+"""
+
+"""
+3.  What is the effect of inserting succesor nodes at the end of the fringe as node is expanded?
+
+    Answer: We will have a breadth search
+"""
+
+"""
+4.  For goal J, give the fringe (successor list) after expanding each node
+
+    Answer: fringe: [State: J - Depth: 3]
+"""
