@@ -1,0 +1,22 @@
+1. What is the branching factor at depth 0? At depth 1?
+depth 0 = 9.
+depth 1 = 72.
+
+2. What is the maximal depth?
+9.
+
+3. Will a MIN move attempt to minimize or maximize the utility?
+minimize.
+
+4. Are states after a terminal state explored?
+Nope.
+
+5. Are all possible states explored to .a terminal state?
+Yes.
+
+6. Is this a depth-first or breadth-first search? How do youknow? (see Python code)
+Depth-first, recursion between min-max.
+
+7. Run the MinMax tic-tac-toe program (you will play O)
+Done.
+
