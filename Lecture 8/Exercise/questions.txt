@@ -1,0 +1,39 @@
+1. What is retuned by create_australias_csp()?
+
+A CSP object which contains information about Australia.
+
+2. What is returned by backtracking_search()?
+
+When it is complete it will return assignment. 
+
+3. What is the purpose of assignment variable?
+
+Assignment contains the assigned variables at the moment.
+
+4. What is the purpose of variable variable?
+
+The next variable not in the assignment.
+
+5. What is the purpose of the following statement? 
+for value in self.order_domain_values(variable, assignment)
+
+
+Returns all the possible domains values for the assignment every time.
+
+6. What would the following do?
+if self.is_consistent('Q' : 'Red', 'NT': 'Blue', 'NSW': 'green'):assignment[variable] = value
+
+return True and change the dict[variable] to the value
+
+7. What would then assignment be?
+NSW: green
+NT: green
+Q: Red
+SA: green
+T: Red
+V: Red
+WA: Red
+
+8. What is the effect of del assignment[variable]?
+
+Deletion of dictionary entry.
