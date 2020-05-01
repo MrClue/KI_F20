@@ -1,3 +1,5 @@
+#Couldn't determine successor_fn
+
 class Node:  # Node has only PARENT_NODE, STATE, DEPTH
     def __init__(self, state, parent=None, depth=0):
         self.STATE = state

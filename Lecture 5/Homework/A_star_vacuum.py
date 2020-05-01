@@ -2,7 +2,6 @@
 This is A*star-first earch
 """
 
-
 class Node:  # Node has only PARENT_NODE, STATE, DEPTH
     def __init__(self, state, parent=None, depth=0):
         self.STATE = state
@@ -105,7 +104,7 @@ def calculate_path(path):
     cost = 0
     for i in range(len(path)):
         if i < len(path) - 1:
-            cost += COST_SPACE.get((path[i + 1].STATE[0], path[i].STATE[0]))
+            cost += 1
     return cost
 
 
@@ -118,37 +117,35 @@ def successor_fn(state):  # Lookup list of successor states
     return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
 
 
-INITIAL_STATE = (('A', 'clean', 'clean'), 6)
-
+INITIAL_STATE = (('A', 'Dirt', 'Dirty'), 3)
 GOAL_STATE = 0
+STATE_SPACE = {INITIAL_STATE: [(('B', 'Dirty', 'Dirty'), 3), (('A', 'Clean', 'Dirty'), 2)],
+               (('B', 'Dirty', 'Dirty'), 3): [(('A', 'Dirty', 'Dirty'), 3), (('B', 'Dirty', 'Clean'), 2)],
+               (('A', 'Clean', 'Dirty'), 2): [(('B', 'Clean', 'Dirty'), 1)],
+               (('B', 'Dirty', 'Clean'), 2): [(('A', 'Dirty', 'Clean'), 1)],
+               (('A', 'Dirty', 'Clean'), 1): [(('A', 'Clean', 'Clean'), 0), (('B', 'Dirty', 'Clean'), 1)],
+               (('B', 'Clean', 'Dirty'), 1): [(('A', 'Clean', 'Dirty'), 2), (('B', 'Clean', 'Clean'), 0)],
+               (('A', 'Clean', 'Clean'), 0): [],
+               (('B', 'Clean', 'Clean'), 0): []}
 
-STATE_SPACE = {INITIAL_STATE: [(('A', 'clean', 'dirty'), ('B', 'dirty', 'dirty')],
-               ('A', 'clean', 'dirty'): [('B', 'clean', 'dirty')],
-               ('B', 'dirty', 'dirty'): [('A', 'dirty', 'dirty'), ('B', 'dirty', 'clean')],
-               ('B', 'clean', 'dirty'): [('B', 'clean', 'clean'), ('A', 'clean', 'dirty')],
-               ('B', 'dirty', 'clean'): [('A', 'dirty', 'clean')],
-               ('B', 'clean', 'clean'): [('A', 'clean', 'clean')],
-               ('A', 'dirty', 'clean'): [('A', 'clean', 'clean'), ('B', 'dirty', 'clean')],
-               ('A', 'clean', 'clean'): []  # goal state
-               }
-
-COST_SPACE = {
-    ('A', 'B'): 1,
-    ('A', 'C'): 2,
-    ('A', 'D'): 4,
-    ('B', 'F'): 5,
-    ('B', 'E'): 4,
-    ('C', 'E'): 1,
-    ('D', 'H'): 1,
-    ('D', 'I'): 2,
-    ('D', 'J'): 2,
-    ('F', 'G'): 1,
-    ('E', 'H'): 3,
-    ('E', 'G'): 2,
-    ('I', 'L'): 3,
-    ('H', 'L'): 5,
-    ('H', 'K'): 6,
-    ('G', 'K'): 6}
+#The cost of moving is always 1
+# COST_SPACE = {
+    # (('A', 'Dirt', 'Dirty'), ('B', 'Dirty', 'Dirty')): 1,
+    # ('A', 'C'): 2,
+    # ('A', 'D'): 4,
+    # ('B', 'F'): 5,
+    # ('B', 'E'): 4,
+    # ('C', 'E'): 1,
+    # ('D', 'H'): 1,
+    # ('D', 'I'): 2,
+    # ('D', 'J'): 2,
+    # ('F', 'G'): 1,
+    # ('E', 'H'): 3,
+    # ('E', 'G'): 2,
+    # ('I', 'L'): 3,
+    # ('H', 'L'): 5,
+    # ('H', 'K'): 6,
+    # ('G', 'K'): 6}
 
 '''
 Run tree search and display the nodes in the path to goal node
