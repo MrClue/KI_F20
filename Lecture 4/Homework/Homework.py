@@ -1,5 +1,3 @@
-#Couldn't determine successor_fn
-
 class Node:  # Node has only PARENT_NODE, STATE, DEPTH
     def __init__(self, state, parent=None, depth=0):
         self.STATE = state
@@ -63,7 +61,7 @@ Insert node in to the queue (fringe).
 
 
 def INSERT(node, queue):
-    return [node] + queue
+    return queue + [node]
 
 
 '''
@@ -72,7 +70,7 @@ Insert list of nodes into the fringe
 
 
 def INSERT_ALL(list, queue):
-    return list + queue
+    return queue + list
 
 
 '''
@@ -87,19 +85,35 @@ def REMOVE_FIRST(queue):
 '''
 Successor function, mapping the nodes to its successors
 '''
+ILLIEGAL_STATES = [
+        ('E', 'W', 'W', 'E'),  
+        ('W', 'E', 'E', 'W'),       
+        ('W', 'W', 'E', 'E'), 
+        ('E', 'E', 'W', 'W'), 
+    ]
 
 
 def successor_fn(state):  # Lookup list of successor states
-    return STATE_SPACE[state]  # successor_fn( 'C' ) returns ['F', 'G']
+    return [state for state in STATE_SPACE[state] if state not in ILLIEGAL_STATES]
 
 
-INITIAL_STATE = 'A'
-GOAL_STATE = 'J'
-STATE_SPACE = {'A': ['B', 'C'],
-               'B': ['D', 'E'], 'C': ['F', 'G'],
-               'D': [], 'E': [], 'F': [], 'G': ['H', 'I', 'J'],
-               'H': [], 'I': [], 'J': [], }
-
+INITIAL_STATE = ('W','W','W','W')
+GOAL_STATE = ('E', 'E', 'E', 'E')
+STATE_SPACE = {('W', 'W', 'W', 'W'): [('E', 'W', 'W', 'W'), ('E', 'E', 'W', 'W'), ('E', 'W', 'E', 'W'), ('E', 'W', 'W', 'E')],
+               ('E', 'W', 'W', 'W'): [('W', 'W', 'W', 'W')],
+               ('E', 'E', 'W', 'W'): [('W', 'E', 'W', 'W'), ('W', 'W', 'W', 'W')],
+               ('E', 'W', 'E', 'W'): [('W', 'W', 'E', 'W'), ('W', 'W', 'W', 'W')],
+               ('E', 'W', 'W', 'E'): [('W', 'W', 'W', 'E'),  ('W', 'W', 'W', 'W')],
+               ('W', 'E', 'W', 'W'): [('E', 'E', 'W', 'W'), ('E', 'E', 'E', 'W'), ('E', 'E', 'W', 'E')],
+               ('W', 'W', 'E', 'W'): [('E', 'W', 'E', 'W'), ('E', 'E', 'E', 'W'), ('E', 'W', 'E', 'E')],
+               ('W', 'W', 'W', 'E'): [('E', 'W', 'W', 'E'), ('E', 'E', 'W', 'E'), ('E', 'W', 'E', 'E')],
+               ('E', 'E', 'E', 'W'): [('W', 'E', 'E', 'W'), ('W', 'W', 'E', 'W'), ('W', 'E', 'W', 'W')],
+               ('E', 'E', 'W', 'E'): [('W', 'E', 'W', 'E'), ('W', 'W', 'W', 'E'), ('W', 'E', 'W', 'W')],
+               ('E', 'W', 'E', 'E'): [('W', 'W', 'E', 'E'), ('W', 'W', 'W', 'E'), ('W', 'W', 'E', 'W')],
+               ('W', 'E', 'E', 'W'): [('E', 'E', 'E', 'W'), ('E', 'E', 'E', 'E')],
+               ('W', 'E', 'W', 'E'): [('E', 'E', 'W', 'E'), ('E', 'E', 'E', 'E')], 
+               ('W', 'W', 'E', 'E'): [('E', 'W', 'E', 'E'), ('E', 'E', 'E', 'E')],
+               ('E', 'E', 'E', 'E'): [] }
 '''
 Run tree search and display the nodes in the path to goal node
 '''
