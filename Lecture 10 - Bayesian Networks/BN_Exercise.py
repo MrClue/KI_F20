@@ -124,8 +124,18 @@ class Variable(object):
         #In case of parents (initial)
         if len(self.parents) == 0:
             self.marginal_probabilities = next(iter(self.probability_table.values()))
-        
-        #WHAT NEXT???
+        #Mostly taken from teacher's example!
+        else:
+            for k, v in self.probability_table.items():
+                
+                parents_probs = multiply_vector_elements(parent.get_marginal_probability(k)
+                    for parent, k in zip(self.parents, k))
+
+                self.marginal_probabilities = [
+                    self.marginal_probabilities[j] + v[j] * parents_probs
+                    for j in range(len(self.assignments))
+                ]
+    
         # set this Node`s state to ready
         self.ready = True
 
