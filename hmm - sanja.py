@@ -97,6 +97,8 @@ def compute_forward(states, observations, transitions, emissions, verbose=False)
 
         if verbose:
             print("forward: ", forward[:, t])
+            
+    print(forward)
 
     forward[f, big_t] = sum(
         forward[s, big_t] * transitions[s, f]
@@ -106,7 +108,7 @@ def compute_forward(states, observations, transitions, emissions, verbose=False)
     if verbose:
         print("Complete forward matrix:")
         print(forward)
-
+    print(forward[f, big_t])
     return forward[f, big_t]
 
 
@@ -172,6 +174,8 @@ def compute_viterbi(states, observations, transitions, emissions, verbose=False)
         viterbi[s, big_t] * transitions[s, f]
         for s in inclusive_range(1, big_n)
     )
+
+    print("backpoint",backpointers[f,big_t],"\n")
 
     if verbose:
         print("Complete viterbi matrix")
